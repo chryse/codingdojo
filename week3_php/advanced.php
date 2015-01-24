@@ -13,7 +13,7 @@
 	<title>superglobal example</title>
 </head>
 <body>
-	<form action="process.php" method="post">
+	<form action="advanced_control.php" method="post">
 		<div>
 			<label for="color">What is your favorite color?</label>
 			<input type="text" name="color" placeholder="put your color here">
