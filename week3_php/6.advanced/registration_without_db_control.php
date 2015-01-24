@@ -53,7 +53,6 @@
 		}
 	}
 
-
 	// error messages are more than 0 go to previous page and warn.
 	if(count($error_messages) > 0) {
 		$_SESSION["error_messages"] = $error_messages;
