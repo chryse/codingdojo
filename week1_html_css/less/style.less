@@ -1,0 +1,28 @@
+@box-size-width: 60px;
+@box-size-height: 60px;
+@background-color: #eee;
+@box1-color: #ff0000;
+@box2-color: #00ff00;
+@box3-color: #0000ff;
+
+div {
+	width: 980px;
+	margin: 0 auto;
+	background: @background-color;
+
+	.box1 {
+		background: @box1-color;
+		width: @box-size-width;
+		height: @box-size-height;
+	}
+	.box2 {
+		background: @box2-color;
+		width: @box-size-width;
+		height: @box-size-height;
+	}
+	.box3 {
+		background: @box3-color;
+		width: @box-size-width;
+		height: @box-size-height;
+	}
+}

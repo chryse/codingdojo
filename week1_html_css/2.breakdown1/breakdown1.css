@@ -1,0 +1,84 @@
+body {
+	font-family: "Times New Roman", Times, serif;
+}
+
+div {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	margin: 10px;
+	padding: 20px;
+}
+
+p {
+	margin-bottom: 10px;
+	line-height: 1.5em;
+}
+
+ul {
+	padding-left: 20px;
+}
+
+li {
+	line-height: 1.5em;
+	margin-bottom: 5px;
+}
+
+.wrapper {
+	width: 970px;
+	display: block;
+	margin: 0 auto;
+	padding: 5px;
+	background: #eee;
+}
+
+.title {
+	display: block;
+	background: #ddd;
+	border-radius: 20px;
+	width: 920px;
+	padding: 5px 20px;
+}
+
+.navigation {
+	display: inline-block;
+	background: #ddd;
+	width: 300px;
+	border-radius: 20px;
+}
+
+.navigation a {
+	text-decoration: none;
+}
+
+.navigation ul {
+	margin: 0;
+}
+
+.navigation li {
+	line-height: 1.2em;
+	margin-bottom: 0px;
+}
+
+.navigation .home {
+	color: red;
+}
+
+.content {
+	display: inline-block;
+	background-color: #aaa;
+	width: 600px;	
+	border-radius: 20px;
+	vertical-align: top;
+}
+
+.content ul {
+	padding-left: 40px;
+}
+
+.footer {
+	display: inline-block;
+	background: #ddd;
+	width: 920px;
+	border-radius: 20px;
+}

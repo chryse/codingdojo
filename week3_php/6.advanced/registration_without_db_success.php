@@ -1,0 +1,1 @@
+<h1 style="padding: 100px; text-align: center;">"Thanks for submitting your information."</h1>

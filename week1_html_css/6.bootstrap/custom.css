@@ -1,0 +1,107 @@
+body {
+    overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    font-family: "lato", helvetica, arial, sans-serif;
+    font-size: 20px;
+}
+
+p, table {
+    font-size: 20px;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: "Dancing Script", helvetica, arial, sans-serif;
+}
+h1 { font-size: 100px; }
+h2 { font-size: 50px; }
+h3 { font-size: 28px; }
+h4 { font-size: 18px; }
+h5 { font-size: 16px; }
+
+p.small { font-size: 16px; }
+
+a, a:hover, a:focus, a:active {
+    outline: 0;
+}
+
+.navbar-default {
+    background-color: #000;
+    border-bottom: 0;
+    padding: 5px 0;
+    font-family: "lato", helvetica, arial, sans-serif;
+}
+
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:focus {
+    color: #fff
+}
+
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > a:active {
+    color: #aaa;
+}
+
+.navbar-brand {
+    padding: 0;
+}
+.navbar-brand img {
+    width: auto;
+    height: 50px;
+}
+
+li.dropdown {
+    padding: 10px 15px;
+}
+
+header {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #333;
+    background: url("http://img3.wikia.nocookie.net/__cb20130507223648/warframe/images/thumb/f/fb/Duel_Dojo.jpg/1000px-Duel_Dojo.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    /*margin-top: 50px;*/
+}
+
+header .container {
+    padding-top: 300px;
+    padding-bottom: 300px;
+}
+
+section {
+    text-align: center;
+    padding: 40px 0 0 0;
+}
+
+.head-title {
+    text-transform: uppercase;
+    /*padding: 40px 0 0 0;*/
+}
+
+.ninja {
+    margin: 10px auto;
+    border: 1px solid #000;
+}
+
+#map {
+    width:100%;
+    height: 500px;
+}
+
+.infoWindowContent {
+    font-size: 18px !important;
+    width: 100px;
+}
+
+footer {
+    margin: 50px 0;
+    text-align: center;
+}

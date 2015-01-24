@@ -1,0 +1,40 @@
+body {
+	font-family: Arial, sans-serif;
+}
+
+p {
+	font-weight: bold;
+	text-align: center;
+}
+	p span {
+		font-weight: normal;
+		font-style: italic;
+	}
+
+/* 480px and below */
+@media all and (max-width: 480px) {
+	#small {
+		color: green;
+	}
+}
+
+/* somewhere in between 480px and 640px */
+@media all and (min-width: 481px) and (max-width: 639px) {
+	#somewhere {
+		color: green;
+	}
+}
+
+/* 640px up to 960px */
+@media all and (min-width: 640px) and (max-width: 960px) {
+	#medium {
+		color: green;
+	}
+}
+
+/* 960px and above */
+@media all and (min-width: 960px) {
+	#large {
+			color: green;
+	}
+}

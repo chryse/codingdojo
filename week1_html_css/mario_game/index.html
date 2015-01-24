@@ -1,0 +1,174 @@
+<html>
+<head>
+	<title>Mario Game</title>
+	<style type="text/css">
+		body {
+			position: relative;
+		}
+		div#world {
+			position: relative;
+			display: inline-block;
+			width: 800px;
+			height: 500px;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+		}
+
+		div.row {
+			width: 5000px;
+		}
+
+		div.row div {
+			display: inline-block;
+			/*position: absolute;*/
+			width: 50px;
+			height: 50px;
+			/*border: 1px solid green;*/
+		}
+		div.sky {
+			background: lightblue;
+		}
+		div.ground {
+			background: brown;
+		}
+		div.question {
+			background: url(question.png) no-repeat 0 0;
+		}
+		div.pipe {
+			background: grey;	
+		}
+		div#character {
+			position: absolute;
+			background: url(char.png);
+			background-position: 0 0;
+			width: 70px;
+			height: 90px;
+		}
+	</style>
+	<script>		
+		var map = {
+			0: "sky",
+			1: "ground",
+			2: "question",
+			3: "pipe"
+		};
+
+		var mario = {
+			x: 0,
+			y: 375,
+			velX: 0,
+			velY: 0,
+			acc: 0,
+			isJumped: false
+		};
+
+		var world = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+		];
+
+
+		var doGame = function() {
+			drawWorld();
+			drawChar();
+			moveChar();
+			moveBackground();
+			checkBorder();
+		}
+
+		setInterval(doGame, 100);
+
+		var drawWorld = function() {
+			var output = "";
+			for (var i = 0; i < world.length; i++) {
+				output += "<div class='row'>";
+				for (var j = 0; j < world[i].length; j++) {
+					output += "<div class='" + map[world[i][j]] + "'></div>";
+				}
+				output += "</div>"
+			}
+			document.getElementById("world").innerHTML = output;
+		}
+
+		var drawChar = function() {
+			document.getElementById("world").innerHTML += "<div id='character'></div>"
+		}
+
+		var moveChar = function() {
+			document.getElementById("character").style.top = mario.y;
+			document.getElementById("character").style.left = mario.x;
+		}
+
+		var moveBackground = function() {
+			if (mario.x > document.getElementById("world").offsetWidth / 2) {
+				// document.getElementById("row").style.left += 50;
+				console.log("over");
+			}
+		}
+
+		var checkBorder = function() {
+			if (mario.x < 0) {
+				mario.x = 0;
+			}
+			else if (mario.x > document.getElementById("world").offsetWidth - 50) {
+				mario.x = document.getElementById("world").offsetWidth - 50;
+			}
+		}
+
+		document.onkeydown = function(e) {	
+			mario.acc = 1.0;
+			switch(e.keyCode) {
+				case 37:
+					mario.velX += mario.acc;
+					mario.x -= mario.velX;
+					break;
+				case 39:
+					mario.velX += mario.acc;
+					mario.x += mario.velX;
+					break;
+				case 32:
+					if (!mario.isJumped) {
+						mario.y -= 50;
+						mario.isJumped = true;	
+					}
+					
+			}
+			console.log(mario.velX + " x: " + mario.x);
+			console.log(e.keyCode);
+		}
+
+		document.onkeyup = function(e) {
+			mario.acc = -0.01;
+			switch(e.keyCode) {
+				case 37:
+					mario.velX = 0;
+					break;
+				case 39:
+					mario.velX = 0;
+					break;
+				case 32:
+					if(mario.isJumped) {
+						mario.y += 50;
+						mario.isJumped = false;
+					}
+			}
+		}
+		
+
+	</script>
+</head>
+
+<body onload="doGame()">
+	<div id="world"></div>
+</body>
+
+</html>

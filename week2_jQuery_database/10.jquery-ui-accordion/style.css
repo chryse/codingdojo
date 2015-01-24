@@ -1,0 +1,22 @@
+div {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+#wrapper {
+	width: 1000px;
+	margin: 0 auto;
+}
+
+#accordion {
+	display: inline-block;
+	width: 50%;
+	float: left;
+}
+
+#tabs {
+	display: inline-block;
+	width: 50%;
+	float: left;
+}

@@ -1,0 +1,56 @@
+#main-container nav ul {
+	list-style: none;
+	padding-left: 0;
+}
+	#main-container nav ul li {
+		display: inline-block;
+		background: #ddd;
+		padding: 5px 10px;
+	}
+		#main-container nav ul li a {
+			color: #555;
+			font-weight: bold;
+			text-decoration: none;
+		}
+		#main-container nav ul li a:hover {
+			color: #f06d06;
+		}
+
+#main-content {
+	padding-top: 20px;
+}
+	#main-content .col4:first-child header h4 {
+		font-size: 22px;
+		margin-top: 0;
+	}
+	#main-content .col4 img.ice-cream {
+		margin-top: 60px;
+	}
+	#main-content .col4.last .address_and_phone header > h4 {
+		font-size: 12px;
+	}
+	#main-content .col4.last .address_and_phone p {
+		font-size: 13px;
+	}
+	#main-content .col4.last .address_and_phone address {
+		margin-bottom: 20px;
+	}
+		#main-content .col4.last .address_and_phone address p {
+			font-size: 12px;
+			margin: 0;
+		}
+
+	#main-content .col4.last .owners img {
+		width: 100px;
+	}
+	#main-content .col4.last .owners p {
+		font-size: 12px;
+		margin-top: 0;
+	}
+	#main-content .col4.last section ul {
+		font-size: 12px;
+		margin-top: 5px;
+	}
+	#main-content .col4.last section header > h4 {
+		margin-bottom: 0;
+	}

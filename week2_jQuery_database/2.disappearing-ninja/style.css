@@ -1,0 +1,9 @@
+img {
+	display: block;
+	padding: 0;
+	margin: 20px 0;
+	border: 1px solid #000;
+	border-radius: 50%;
+	width: 120px;
+	height: 75px;
+}

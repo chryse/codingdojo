@@ -1,0 +1,26 @@
+h1 {
+	margin-bottom: 30px;
+}
+
+#card-container {
+	
+}
+
+#card-container div.card-box {
+	position: relative;
+}
+
+#card-container div.name {
+	padding: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #999;
+}
+
+#card-container div.name p {
+	text-align: center;
+}
+
+#card-container div.desc {
+	padding: 30px;
+	font-size: 1.5em;
+}
