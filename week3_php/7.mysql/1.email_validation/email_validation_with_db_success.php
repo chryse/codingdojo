@@ -50,7 +50,7 @@
 		<form class="reset" method="post" action="email_validation_with_db_success.php">
 			<input type="submit" name="reset" value="Delete">
 		</from>
-		<button><a href="email_validation_with_db.php">Go Back</a></button>
+		<button><a href="index.php">Go Back</a></button>
 	</div>
 </body>
 </html>

@@ -29,7 +29,7 @@
 
 	if(count($errors) > 0) {
 		$_SESSION["errors"] = $errors;
-		header("location: email_validation_with_db.php");
+		header("location: index.php");
 		die();
 	}
 
