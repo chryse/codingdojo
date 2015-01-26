@@ -61,7 +61,7 @@
 
 			// if user is not found, show login fails
 			else {
-				$errors = "The email address is not found. Please try again";
+				$errors = ["The email address is not found. Please try again"];
 				$_SESSION["errors"] = $errors;
 				header("location: index.php");
 				die();
