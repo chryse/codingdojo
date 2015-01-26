@@ -44,28 +44,45 @@
 
 		// if there is no error messages, validate a user
 		else {
-			$password = $post["password"];
-			$email = $post["email"];
-			$query = "SELECT users.id, users.first_name, users.last_name from users
-					WHERE users.password = '$password'
-					AND users.email = '$email'";
+			$password = escape_this_string($post["password"]);
+			$email = escape_this_string($post["email"]);
+			$query = "SELECT users.id, users.password, users.first_name, users.last_name from users
+					WHERE users.email = '$email'";
 			$user = fetch_all($query);
 
-			// if user is found, go to success page
+			// var_dump($user[0]["password"]);
+			// var_dump($user);
+			// echo "<br />";
+
+			// when user is found,
 			if(count($user) > 0) {
-				$_SESSION["success_login"] = "User successfully logged in!";
-				$_SESSION["user_email"] = $post["email"];
-				// echo $user[0]["last_name"];
-				$_SESSION["user_name"] = $user[0]["first_name"] . " " . $user[0]["last_name"];
-				$_SESSION["current_user_page"] = $user[0]["id"];
-				header("location: main.php");
-				die();
+				$encrypted_password = crypt($password, $user[0]["password"]);
+
+				// you have successfully logged in
+				if($user[0]["password"] == $encrypted_password) {
+					$_SESSION["success_login"] = "User successfully logged in!";
+					$_SESSION["user_email"] = $post["email"];
+					$_SESSION["user_name"] = $user[0]["first_name"] . " " . $user[0]["last_name"];
+					$_SESSION["current_user_page"] = $user[0]["id"];
+
+					header("location: main.php");
+					die();
+				}
+				else {
+					$errors = ["Your password does not match. Please try again"];
+					$_SESSION["errors"] = $errors;
+
+					header("location: index.php");
+					die();
+				}
+				
 			}
 
 			// if user is not found, show login fails
 			else {
-				$errors = ["Login information is not correct. Please try again"];
+				$errors = ["Your email is not found. Please try again"];
 				$_SESSION["errors"] = $errors;
+
 				header("location: index.php");
 				die();
 			}
@@ -139,12 +156,20 @@
 
 		// success to register
 		else {
-			$first_name = $post["first_name"];
-			$last_name = $post["last_name"];
-			$password = $post["password"];
-			$email = $post["email"];
+			// generate a salt
+			$salt = bin2hex(openssl_random_pseudo_bytes(22));
+
+			$first_name = escape_this_string($post["first_name"]);
+			$last_name = escape_this_string($post["last_name"]);
+			$password = escape_this_string($post["password"]);
+
+			// using the salt for password encryption
+			$encrypted_password = crypt($password, $salt);
+
+			$email = escape_this_string($post["email"]);
+
 			$query = "INSERT INTO users (first_name, last_name, password, email, created_at, updated_at)
-						VALUES ('$first_name', '$last_name', '$password', '$email' , now(), now())";
+						VALUES ('$first_name', '$last_name', '$encrypted_password', '$email' , now(), now())";
 			run_mysql_query($query);
 			$_SESSION["success_register"] = "User successfully created!";
 			$_SESSION["user_name"] = $post["first_name"] . " " . $post["last_name"];
