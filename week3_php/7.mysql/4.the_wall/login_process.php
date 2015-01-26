@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	require_once("db_connect.php");
+	require_once("helper.php");
 
 	if(isset($_POST["action"]) && $_POST["action"] == "login") {
 
@@ -45,7 +46,7 @@
 		else {
 			$password = $post["password"];
 			$email = $post["email"];
-			$query = "SELECT users.first_name, users.last_name from users
+			$query = "SELECT users.id, users.first_name, users.last_name from users
 					WHERE users.password = '$password'
 					AND users.email = '$email'";
 			$user = fetch_all($query);
@@ -56,6 +57,7 @@
 				$_SESSION["user_email"] = $post["email"];
 				// echo $user[0]["last_name"];
 				$_SESSION["user_name"] = $user[0]["first_name"] . " " . $user[0]["last_name"];
+				$_SESSION["current_user_page"] = $user[0]["id"];
 				header("location: main.php");
 				die();
 			}
@@ -147,6 +149,7 @@
 			$_SESSION["success_register"] = "User successfully created!";
 			$_SESSION["user_name"] = $post["first_name"] . " " . $post["last_name"];
 			$_SESSION["user_email"] = $post["email"];
+			$_SESSION["current_user_page"] = get_user_id($post["email"]);
 			header("location: main.php");
 			die();
 		}
