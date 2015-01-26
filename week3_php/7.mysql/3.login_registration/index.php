@@ -1,6 +1,5 @@
 <?php
 	session_start();
-	var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,9 +42,8 @@
 				foreach($_SESSION["errors"] as $error) {
 					echo "<p class='error'>$error</p>";
 				}
+				unset($_SESSION["errors"]);
 			}
-
-			unset($_SESSION["errors"]);
 		?>
 	</div>
 	<form method="post" action="login_control.php">
