@@ -40,7 +40,6 @@
 
 		$messages = fetch_all($query_messages);
 
-
 		for($i = count($messages) -1; $i >= 0; $i--) {
 			// get message unique id in order to put it on the form action value
 			$message_id = $messages[$i]["id"];
@@ -123,7 +122,8 @@
 					<p>
 						<a href='main.php?id={$user['id']}'>
 							{$user['first_name']} {$user['last_name']}
-						</a>
+						</a><br/>
+						{$user['email']}
 					</p>
 				</div>";
 		}
@@ -142,7 +142,8 @@
 					<p>
 						<a href='main.php?id={$user['id']}'>
 							{$user['first_name']} {$user['last_name']}
-						</a>
+						</a><br />
+						{$user['email']}
 					</p>
 				</div>";
 		}
@@ -164,7 +165,7 @@
 				<form action="post_process.php" method="post">
 					<input type="hidden" name="action" value="message_post">
 					<div class="form-group">
-						<textarea name="message" rows="5" cols="10" maxlength="1000" placeholder="Leave a message!" class="form-control"></textarea>
+						<textarea name="message" rows="5" cols="10" placeholder="Leave a message!" class="form-control"></textarea>
 					</div>
 					<div class="text-right">
 						<button type="submit" name="post" class="btn btn-primary">Post a message</button>

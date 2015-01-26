@@ -32,8 +32,8 @@
 				$current_user_page = get_user_id($session["user_email"]);
 			}
 
-			$user_id = get_user_id($session["user_email"]);
-			$message = $post["message"];
+			$user_id = escape_this_string(get_user_id($session["user_email"]));
+			$message = escape_this_string($post["message"]);
 			
 			$query_message_post = "INSERT INTO messages (user_id, message, created_at, updated_at)
 									VALUES('$user_id', '$message', now(), now())";
@@ -54,9 +54,9 @@
 		// var_dump($post);
 
 		if(!empty($post["comment"])) {
-			$message_id = $post["id"];
-			$user_id = get_user_id($_SESSION["user_email"]);
-			$comment = $post["comment"];
+			$message_id = escape_this_string($post["id"]);
+			$user_id = escape_this_string(get_user_id($_SESSION["user_email"]));
+			$comment = escape_this_string($post["comment"]);
 
 			$query_comment_post = "INSERT INTO comments (user_id, message_id, comment, created_at, updated_at)
 									VALUES('$user_id', '$message_id', '$comment', now(), now())";
