@@ -1,13 +1,18 @@
 <?php
 	session_start();
 	require_once("db_connect.php");
+	require_once("helper.php");
 
 	if(isset($_POST["action"]) && $_POST["action"] == "message_post") {
-		message_post($_POST);
+		message_post($_POST, $_SESSION);
 	}
 
-	else if(isset($_POST["action"])) {
-		comment_post($_POST);
+	else if(isset($_POST["action"]) && $_POST["action"] == "comment_post") {
+		comment_post($_POST, $_SESSION);
+	}
+
+	else if(isset($_POST["action"]) && isset($_POST["action"]) == "message_delete") {
+		delete_post($_POST, $_SESSION);
 	}
 
 	else {
@@ -16,12 +21,18 @@
 	}
 	
 	// post a message
-	function message_post($post) {
-
-		// var_dump($post);
+	function message_post($post, $session) {
 
 		if(!empty($post["message"])) {
-			$user_id = get_user_id($_SESSION["user_email"]);
+
+			if(isset($session["current_user_page"])) {
+				$current_user_page = $session["current_user_page"];
+			}
+			else {
+				$current_user_page = get_user_id($session["user_email"]);
+			}
+
+			$user_id = get_user_id($session["user_email"]);
 			$message = $post["message"];
 			
 			$query_message_post = "INSERT INTO messages (user_id, message, created_at, updated_at)
@@ -33,17 +44,17 @@
 			
 		}
 
-		header("location: main.php");
+		header("location: main.php?id=" . $session["current_user_page"]);
 		die();
 	}
 
 	// post a comment
-	function comment_post($post) {
+	function comment_post($post, $session) {
 
 		// var_dump($post);
 
 		if(!empty($post["comment"])) {
-			$message_id = $post["action"];
+			$message_id = $post["id"];
 			$user_id = get_user_id($_SESSION["user_email"]);
 			$comment = $post["comment"];
 
@@ -55,18 +66,34 @@
 			// var_dump($query_comment_post);
 		}
 
-		header("location: main.php");
+		header("location: main.php?id=" . $session["current_user_page"]);
 		die();
 		
 	}
 
-	// get user id
-	function get_user_id($user_email) {
-		$query = "SELECT users.id FROM users
-				WHERE '$user_email' = users.email";
-		$user_id = fetch_all($query)[0]["id"];
-		return $user_id;
-	}
+	// delete post
+	function delete_post($post, $session) {
+		$message_id = $post["id"];
+		$user_id = get_user_id($_SESSION["user_email"]);
 
+		$query_delete_comments = "DELETE comments FROM comments
+								WHERE comments.message_id = '$message_id'";
+
+		run_mysql_query($query_delete_comments);
+
+		$query_delete_post = "DELETE messages FROM messages
+							WHERE messages.id = '$message_id'";
+
+		run_mysql_query($query_delete_post);
+		// $query_delete_post = "DELETE messages FROM messages
+		// 					LEFT JOIN comments
+		// 					ON comments.message_id = messages.id
+		// 					WHERE messages.id = '$message_id'";
+
+		// run_mysql_query($query_delete_post);
+
+		header("location: main.php?id" . $session["current_user_page"]);
+		die();
+	}
 
 ?>

@@ -41,11 +41,11 @@
 <nav class="navbar navbar-fixed-top navbar-inverse">
 	<div class="container">
 		<div class="navbar-header">
-			<a class="navbar-brand">The Wall</a>
+			<a class="navbar-brand" href="main.php?id=<?= get_user_id($_SESSION['user_email']); ?>">The Wall</a>
 		</div>
 		<div class="navbar-right">
 			<ul class="nav navbar-nav">
-				<li><a>Welcome <?= $message; ?></a></li>
+				<li><a href="main.php?id=<?= get_user_id($_SESSION['user_email']); ?>">Welcome <?= $message; ?></a></li>
 				<li><a href="login_process.php">log out</a></li>
 			</ul>
 

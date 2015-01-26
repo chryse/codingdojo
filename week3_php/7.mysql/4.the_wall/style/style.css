@@ -36,14 +36,14 @@ section {
 	padding-top: 50px;
 }
 
-div.message-box {
+.message-box {
 	margin: 30px 5px 10px 5px;
 	padding: 10px 12px;
 	border-top: 1px solid #aaa;
 	border-bottom: 1px solid #aaa;
 }
 
-div.comment-box {
+.comment-box {
 	margin: 0;
 	padding: 10px 20px;
 }
@@ -64,6 +64,11 @@ div.comment-box {
 
 .error li {
 	line-height: 1.8em;
+}
+
+.date {
+	font-size: 0.9em;
+	font-weight: normal;
 }
 
 footer {

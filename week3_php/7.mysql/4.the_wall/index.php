@@ -13,22 +13,26 @@
 	include("header.php");
 ?>
 <div class="container">
-	<div class="row main-view">
-		<h1>Welcome to the Wall</h1>
-		<h2>Simple post system</h2>
+	<div class="row">
+		<div class="col-sm-6 main-view">
+			<h1>Welcome to the Wall</h1>
+			<h2>Simple Posting System</h2>
+		</div>
 	</div>
 	<?php
 		if(isset($_SESSION["errors"])) {
 	?>
 	<div class="row bg-danger error">
-		<ul>
+		<div class="col-sm-6">
+			<ul>
 	<?php
 			foreach($_SESSION["errors"] as $error) {
 					echo "<li>$error</li>";
 			}
 			unset($_SESSION["errors"]);
 	?>
-		</ul>
+			</ul>
+		</div>
 	</div>
 	<?php
 		}
