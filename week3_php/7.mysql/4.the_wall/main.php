@@ -36,18 +36,19 @@
 								 UNIX_TIMESTAMP(messages.created_at) as unix_timestamp
 						FROM users 
 						JOIN messages ON users.id = messages.user_id
-						WHERE users.email = '$email'";
+						WHERE users.email = '$email'
+						ORDER BY created_at DESC";
 
 		$messages = fetch_all($query_messages);
 
-		for($i = count($messages) -1; $i >= 0; $i--) {
+		foreach($messages as $message) {
 			// get message unique id in order to put it on the form action value
-			$message_id = $messages[$i]["id"];
-			$message_first_name = $messages[$i]["first_name"];
-			$message_last_name = $messages[$i]["last_name"];
-			$message_created_at = $messages[$i]["created_at"];
-			$message_message = $messages[$i]["message"];
-			$message_unix_timestamp = $messages[$i]["unix_timestamp"];
+			$message_id = $message["id"];
+			$message_first_name = $message["first_name"];
+			$message_last_name = $message["last_name"];
+			$message_created_at = $message["created_at"];
+			$message_message = $message["message"];
+			$message_unix_timestamp = $message["unix_timestamp"];
 
 			$delete = "";
 
@@ -73,6 +74,7 @@
 						$delete
 				  </div>";
 
+			// display comments on each message
 			show_comments($message_id);
 
 			echo "<h4 class='comment-box'>Post a comment</h4>	
@@ -95,7 +97,8 @@
 						FROM comments
 						JOIN messages ON messages.id = comments.message_id
 						JOIN users ON users.id = comments.user_id
-						WHERE messages.id = '$message_id'";
+						WHERE messages.id = '$message_id'
+						ORDER BY comments.created_at ASC";
 		$comments = fetch_all($query_comments);
 
 		// var_dump($comments);
