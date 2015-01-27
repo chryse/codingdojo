@@ -29,7 +29,7 @@ function selection_sort($arr) {
 	$time_start = microtime_float();
 
 	$len_array = count($arr);
-	for($i = 0; $i < $len_array; $i++) {		
+	for($i = 0; $i < $len_array; $i++) {
 		// echo "Iternation: " . $i . " / the length of the array excution " . ($len_array - $start_point) . "<br />";
 
 		// need only index value which indicates where the lowest number is located.
@@ -63,7 +63,7 @@ function selection_sort_upgrade($arr) {
 	$time_start = microtime_float();
 
 	$len_array = count($arr);
-	for($i = 0; $i < $len_array; $i++) {		
+	for($i = 0; $i < $len_array; $i++) {
 
 		// need only index value which indicates where the lowest number is located.
 		$min_index = $i;
