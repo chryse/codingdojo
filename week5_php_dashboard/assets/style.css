@@ -1,0 +1,125 @@
+* {
+	color: #444;
+}
+
+.padding-top {
+	padding-top: 60px;
+}
+
+.main-view {
+	display: table;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	padding: 150px 0;
+	margin-bottom: 30px;
+	font-size: 18px;
+	font-weight: 200;
+	line-height: 30px;
+	color: #fff;
+	background:url("http://www.hyunjunkim.com/the_wall/images/bg.jpg") no-repeat bottom center;
+	background-color: #eee;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-o-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.main-view h1 {
+	font-size: 3.5em;
+}
+
+.main-view h2 {
+	color: #eee;
+}
+
+
+/* message box */
+.message-box {
+	margin-bottom: 30px;
+	border: 1px solid #eee;
+	overflow: hidden;
+}
+
+.message-title {
+	font-weight: bold;
+	padding: 15px;
+	border-bottom: 1px solid #eee;
+}
+
+.message-content {
+	font-size: 1.1em;
+	font-weight: bold;
+	line-height: 2.0em;
+	padding: 15px;
+	border-bottom: 1px solid #eee;
+	
+}
+
+/* comment box */
+.comment-content {
+	margin-top: 20px;
+	margin-bottom: 30px;
+	overflow: hidden;
+}
+
+
+
+.error {
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.error li {
+	line-height: 1.8em;
+}
+
+.date {
+	font-size: 0.9em;
+	font-weight: normal;
+}
+
+
+.footer {
+	margin-top: 45px;
+	padding-top: 5px;
+	border-top: 1px solid #eaeaea;
+	color: #999999;
+}
+
+.footer p {
+	float: left;
+	padding: 10px;
+}
+
+.footer ul {
+	float: right;
+	list-style: none;
+	padding: 10px;
+}
+
+.footer ul li {
+	float: left;
+	line-height: 20px;
+	padding: 0 10px;
+	border-right: 1px solid #bbb;
+}
+
+.footer ul li:last-child {
+	border-right: 0;
+}
+
+.footer a {
+	color: #888;
+}
+
+.bg-danger {
+	border-radius: 5px;
+}
+
+.bg-danger p {
+	padding: 2px 15px;
+}
