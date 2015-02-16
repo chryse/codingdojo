@@ -1,17 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<title>Welcome to Book Review</title>
-	<meta charset="utf-8">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link href="/assets/style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-</head>
+<?php $this->load->view("header")?>
 <body>
 
 <div id="main" class="container">

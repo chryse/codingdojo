@@ -11,4 +11,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link href="/assets/style.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$(document).on("submit", "form#delete", function() {
+				$.ajax({
+					url: $(this).attr("action"),
+					type: "POST",
+					data: $(this).serialize()
+				}).done(function(data) {
+					console.log(data);
+					$("div#review-list").html(data);
+				});
+				return false;
+			});
+
+			// $(document).on("change", "div.note textarea", function() {
+			// 	$(this).parent().submit();
+		});
+
+	</script>
 </head>

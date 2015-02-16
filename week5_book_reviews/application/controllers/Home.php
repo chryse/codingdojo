@@ -10,11 +10,12 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model("User");
 		$this->load->library("form_validation");
+		$this->view_data["page_title"] = "Welcome to Book Review";
 	}
 
 	public function index()
 	{
-		$this->load->view('index');
+		$this->load->view('index', $this->view_data);
 	}
 
 	public function logout()

@@ -21,6 +21,7 @@ class Books extends CI_Controller {
 		}
 		else {
 			$this->view_data["name"] = $this->session->userdata("user")["name"];
+			$this->view_data["page_title"] = "Welcome " . $this->view_data["name"];
 		}
 
 		// main view
@@ -30,6 +31,7 @@ class Books extends CI_Controller {
 		}
 		else {
 			$this->view_data["books"] = $this->Book->fetch_book_info_by_id($this->uri->segment(2));
+			$this->view_data["page_title"] = $this->view_data["books"][0]["title"];
 			$this->load->view('book_detail', $this->view_data);
 		}
 
@@ -39,7 +41,8 @@ class Books extends CI_Controller {
 	// book add with review page
 	public function add()
 	{
-		$this->load->view("add");
+		$this->view_data["page_title"] = "Add a new book";
+		$this->load->view("add", $this->view_data);
 	}
 
 	// book add process page

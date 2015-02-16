@@ -1,17 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Books Home</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link href="/assets/style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-</head>
+<?php $this->load->view("header")?>
 <body>
 <header class="navbar">
 	<div class="container">
@@ -32,12 +19,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		for($i = 0; $i < 3; $i++) {
 ?>
 			<h3><a href="/books/<?= $books[$i]['book_id']?>"><?= $books[$i]["title"]?></a></h3>
-			<P>rating: <?= $books[$i]["rating"]?></p>
-			<h5>
-				<a href="/users/<?= $books[$i]['user_id']?>">
-					<?= $books[$i]["name"]?>
-				</a> says: <?= $books[$i]["review"]?>
-			</h5>
+			<P>
+				<a href="/users/<?= $books[$i]['user_id']?>"><?= $books[$i]["name"]?></a> rating: <?= $books[$i]["rating"]?>
+			</p>
+			<p>
+				<?= $books[$i]["review"]?>
+			</p>
 			<p>Posted on <?=$books[$i]["created_at"]?></p>
 			<hr />
 <?php

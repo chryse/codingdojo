@@ -1,17 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Add Book and Review</title>
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	<link href="/assets/style.css" rel="stylesheet" type="text/css">
-	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
-</head>
+<?php $this->load->view("header")?>
 <body>
 <header class="navbar">
 	<div class="container">
@@ -36,35 +23,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<h1>Add a New Book Title and a Review</h1>
 	<form class="form-horizontal" method="post" action="/books/add_process">
 		<div class="form-group">
-			<label class="col-md-2 label-control">Book Title</label>
+			<label class="col-md-2">Book Title</label>
 			<div class="col-md-5">
 				<input class="form-control" type="text" name="title">
 			</div>
 		</div>
-		<label>Author</label>
-		<label>Choose from the list</label>
-		<select name="author_option">
-			<option value="Name A">Name A</option>
-			<option value="Name B">Name B</option>
-			<option value="Name C">Name C</option>
-			<option value="Name D">Name D</option>
-			<option value="Name E">Name E</option>
-			<option value="Name F">Name F</option>
-		</select>
-		<label>Or add a new author</label>
-		<input type="text" name="author">
-		<label>Review</label>
-		<textarea name="review"></textarea>
-		<label>Rating</label>
-		<select name="rating">
-			<option value="1"><i class="icon-star"></i></option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-		</select>
-		<input type="hidden" name="action" value="add">
-		<button class="btn btn-primary" type="submit">Add Book and Review</button>
+		<div class="form-group">
+			<label class="col-md-2">Author</label>
+			<div class="col-md-5">
+				<label>Choose from the list</label>
+				<select class="form-control" name="author_option">
+					<option value="Name A">Name A</option>
+					<option value="Name B">Name B</option>
+					<option value="Name C">Name C</option>
+					<option value="Name D">Name D</option>
+					<option value="Name E">Name E</option>
+					<option value="Name F">Name F</option>
+				</select>
+				<label>Or add a new author</label>
+				<input class="form-control" type="text" name="author">
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-2">Review</label>
+			<div class="col-md-5">
+				<textarea class="form-control" rows="5" name="review"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="col-md-2">Rating</label>
+			<div class="col-md-5">
+				<select class="form-control" name="rating">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+			</div>
+		</div>
+		<div class="col-md-7 text-right">
+			<input type="hidden" name="action" value="add">
+			<button class="btn btn-primary" type="submit">Add Book and Review</button>
+		</div>
 	</form>
 </div>
 </body>
