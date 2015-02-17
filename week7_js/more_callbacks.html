@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title>More Callbacks</title>
+        <meta charset="utf-8">
+        <script>
+        	function MainFunction(callback) {
+        		var randomNumber = Math.random();
+        		var randomString = Math.random().toString(36).slice(2);
+        		alert(callback(randomNumber, randomString));
+        	}
+
+        	MainFunction(function(randomNumber, randomString) {
+        		console.log(randomNumber, randomString);
+        		return 777;
+        	})
+
+        	function MainFunction1(callback1) {
+        		callback1(callback2);
+        	}
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

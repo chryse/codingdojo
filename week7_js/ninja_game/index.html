@@ -1,0 +1,140 @@
+<html>
+<head>
+	<title>Character Game</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<style>
+		#stage {
+			width: 500px;
+			height: 500px;
+			border: 1px solid #aaa;
+			overflow: hidden;
+			position: relative;
+		}
+		#character, #character2 {
+			position: absolute;
+			/*top: 0px;
+			left: 0px;*/
+		}
+	</style>
+</head>
+<body>
+
+	<div id="stage">
+		<div id="character"><img src=""></div>
+		<div id="character2"><img src=""></div>
+	</div>
+
+	<script>
+
+	var WIDTH = HEIGHT = 500;
+
+	function gameLoop()
+	{
+		ch1.drawCharacter();
+		ch2.drawCharacter();
+	}
+
+	setInterval(gameLoop, 150);
+
+	var ch1 = new Character("character", 0, 0);
+	var ch2 = new Character("character2", 450, 0);
+
+	document.onkeydown = function(e) {
+
+		if(e.keyCode == 37) {
+			ch1.updateAction("LEFT");
+		}
+		else if(e.keyCode == 39) {
+			ch1.updateAction("RIGHT");
+		}
+		else if(e.keyCode == 38) {
+			ch1.updateAction("UP");
+		}
+		else if(e.keyCode == 40) {
+			ch1.updateAction("DOWN");
+		}
+		else if(e.keyCode == 65) {
+			ch2.updateAction("LEFT");
+		}
+		else if(e.keyCode == 68) {
+			ch2.updateAction("RIGHT");
+		}
+		else if(e.keyCode == 87) {
+			ch2.updateAction("UP");
+		}
+		else if(e.keyCode == 83) {
+			ch2.updateAction("DOWN");
+		}
+		console.log(e.keyCode);
+	}
+
+	// Ninja character class
+	function Character(selector, x , y) {
+		var selector = selector;
+		var counter = 0;
+
+		var constants = {
+							"LEFT" 	: ["img/left1.png", "img/left2.png"],
+							"RIGHT" : ["img/right1.png", "img/right2.png"],
+							"UP" 	: ["img/top1.png", "img/top2.png"],
+							"DOWN" 	: ["img/down1.png", "img/down2.png"]
+		}
+
+		this.character_x = x;
+		this.character_y = y;
+		this.action = "DOWN";
+
+		this.drawSprite = function(img) {
+			$("#"+selector + " img").attr("src", img);
+			$("#"+selector).css("left", this.character_x + "px").css("top", this.character_y + "px")
+			console.log(this.character_x, this.character_y);
+		}
+
+		// update action
+		this.updateAction = function(action) {
+			counter = 0;
+			this.action = action;
+		}
+
+		this.updateCoordinate = function() {
+
+			if(counter >= constants[this.action].length) {
+				counter = 0;
+			}
+
+			if(this.action == "LEFT") {
+				this.character_x -= 10;
+				if(this.character_x < 0) {
+					this.character_x = 0;
+				}
+			}
+			else if(this.action == "RIGHT") {
+				this.character_x += 10;
+				if(this.character_x > WIDTH - $("#"+selector).width()) {
+					this.character_x = WIDTH - $("#"+selector).width();
+				}
+			}
+			else if(this.action == "UP") {
+				this.character_y -= 10;
+				if(this.character_y < 0) {
+					this.character_y = 0;
+				}
+			}
+			else if(this.action == "DOWN") {
+				this.character_y += 10;
+				if(this.character_y > HEIGHT - $("#"+selector).height()) {
+					this.character_y = HEIGHT - $("#"+selector).height();
+				}
+			}
+		}
+
+		this.drawCharacter = function() {
+			this.updateCoordinate();
+			this.drawSprite(constants[this.action][counter++]);
+		}
+	}
+
+	</script>
+
+</body>
+</html>

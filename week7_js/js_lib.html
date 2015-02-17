@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title>Your own custom Javascript Library!</title>
+        <meta charset="utf-8">
+        <script src="js_lib.js"></script>
+        <script>
+
+        	arr = [1,2,3];
+        	obj = {el1: 1, el2: 2, el3: 3}
+
+			var en = _.map(arr, function(num){
+				return num * 3;
+			});
+			console.log(en);
+
+			var ob = _.map(obj, function(num) {
+				return num * 3;
+			});
+			console.log(ob);
+			
+			var reduce1 = _.reduce(arr, function(memo, item) {
+				return memo + item;
+			}, 0);
+			console.log(reduce1);
+
+			var reduce2 = _.reduce(obj,function(memo, item) {
+				return memo + item;
+			}, 0);
+			console.log(reduce2);
+
+			var find1 = _.find(arr, function(num){
+				return num % 2 == 0;
+			});
+			console.log(find1);
+
+			
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
