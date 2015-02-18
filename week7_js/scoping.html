@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Scoping</title>
+        <script>
+        	function Person(n, o) {
+        		var person = {};
+        		person.name = n;
+        		person.occupation = o;
+
+        		person.hi = function() {
+        			console.log("hi I am", person.name);
+        		}
+        		return person;
+        	}
+
+        	var jun = Person("jun", "coding ninja");
+        	jun.hi();
+
+        	var jun1 = new Person("jun1", "coding ninja1");
+        	jun1.hi();
+
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

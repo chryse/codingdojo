@@ -6,34 +6,58 @@
         <script src="js_lib.js"></script>
         <script>
 
-        	arr = [1,2,3];
-        	obj = {el1: 1, el2: 2, el3: 3}
+        	var arr = [1,2,3,4,5];
+        	var obj = {el1: 1, el2: 3, el3: 4, el4: 2, el5: 9};
 
-			var en = _.map(arr, function(num){
+			var map1 = _.map(arr, function(num){
 				return num * 3;
 			});
-			console.log(en);
+			console.log("map1", map1);
 
-			var ob = _.map(obj, function(num) {
+			var map2 = _.map(obj, function(num) {
 				return num * 3;
 			});
-			console.log(ob);
+			console.log("map2", map2);
 			
 			var reduce1 = _.reduce(arr, function(memo, item) {
 				return memo + item;
 			}, 0);
-			console.log(reduce1);
+			console.log("reduce1", reduce1);
 
 			var reduce2 = _.reduce(obj,function(memo, item) {
 				return memo + item;
 			}, 0);
-			console.log(reduce2);
+			console.log("reduce2", reduce2);
 
 			var find1 = _.find(arr, function(num){
 				return num % 2 == 0;
 			});
-			console.log(find1);
+			console.log("find1", find1);
 
+			var find2 = _.find(obj, function(num){
+				return num % 2 == 0;
+			});
+			console.log("find2", find2);
+
+			var filter1 = _.filter(arr, function(num){
+				return num % 2 == 0;
+			});
+			console.log("filter1", filter1);
+
+			var filter2 = _.filter(obj, function(num){
+				return num % 2 == 0;
+			});
+			console.log("filter2", filter2);
+
+			var reject1 = _.reject(arr, function(num){
+				return num % 2 == 0;
+			});
+			console.log("reject1", reject1);
+
+			var reject2 = _.reject(obj, function(num){
+				return num % 2 == 0;
+			});
+			console.log("reject2", reject2);
 			
         </script>
     </head>

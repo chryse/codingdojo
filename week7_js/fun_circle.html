@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title>Fun Circle</title>
+        <meta charset="utf-8">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+        <style>
+        	body {
+        		margin: 0;
+        		padding: 0;
+        	}
+
+        	canvas {
+        		border: 1px solid #aaa;
+        	}
+
+        </style>
+    </head>
+    <body>
+    	<canvas id="canvas" width="1024" height="768"></canvas>
+    </body>
+    <script>
+        	var WIDTH = 1024;
+        	var HEIGHT = 768;
+        	var canvas = document.getElementById("canvas");
+        	var context = canvas.getContext("2d");
+        	
+        	var time_begin = new Date();
+        	for(var i = 0; i < 500; i++) {
+        		var circle = new Circle();
+        		circle.drawCircle();
+        	}
+        	var time_end = new Date();
+        	console.log("time elapse:", (time_end - time_begin));
+
+
+        	function Circle() {
+        		this.radius = Math.ceil(Math.random()*100);
+        		this.x = Math.round(Math.random() * WIDTH);
+        		this.y = Math.round(Math.random() * HEIGHT);
+
+        		// check out of border balls
+        		if (this.x <= this.radius) {
+        			this.x += this.radius;
+        		}
+        		if (this.x >= WIDTH-this.radius) {
+        			this.x -= this.radius;
+        		}
+        		if (this.y <= this.radius) {
+        			this.y += this.radius;
+        		}
+        		if (this.y >= HEIGHT-this.radius) {
+        			this.y -= this.radius;
+        		}
+        		this.color = [Math.ceil(Math.random() * 255), Math.ceil(Math.random() * 255), Math.ceil(Math.random() * 255)];
+
+        		// this.displayInfo = function() {
+        		// 	console.log(this.radius, this.x, this.y, this.color);
+        		// }
+
+        		this.drawCircle = function() {
+        			context.beginPath();
+        			context.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
+        			// context.arc(974, 50, 50, 0, 2*Math.PI);
+        			context.closePath();
+        			context.fillStyle = "#" + this.color[0].toString(16) + this.color[1].toString(16) + this.color[2].toString(16);
+        			context.fill();
+        		}
+        	}
+
+        	Circle.prototype.drawCircle1 = function() {
+        		context.beginPath();
+        			context.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false);
+        			context.closePath();
+        			context.fillStyle = "#" + this.color[0].toString(16) + this.color[1].toString(16) + this.color[2].toString(16);
+        			context.fill();
+        	}
+
+        	// using prototype
+        	var time_begin1 = new Date();
+        	for(var i = 0; i < 500; i++) {
+        		var circle = new Circle();
+        		circle.drawCircle1();
+        	}
+        	var time_end1= new Date();
+        	console.log("time elapse1:", (time_end1 - time_begin1));
+
+        </script>
+</html>

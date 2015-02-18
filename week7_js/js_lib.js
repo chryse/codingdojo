@@ -33,20 +33,55 @@ var _ = (function() {
 		find: function(obj, callback) {
 			if(Array.isArray(obj)) {
 				for(var i = 0; i < obj.length; i++) {
-					return callback(obj[i]);
+					if(callback(obj[i])) {
+						return obj[i];	
+					}
 				}
 			}
 			else {
 				for(var key in obj) {
-					callback(obj[key]);
+					if(callback(obj[key])) {
+						return obj[key];
+					}
 				}
 			}
 		},
-		filter: function() {
-
+		filter: function(obj, callback) {
+			var result = [];
+			if(Array.isArray(obj)) {
+				for(var i = 0; i < obj.length; i++) {
+					if(callback(obj[i])) {
+						result.push(obj[i]);
+					}
+				}
+			}
+			else {
+				for(var key in obj) {
+					if(callback(obj[key])) {
+						result.push(obj[key]);
+					}
+				}
+			}
+			return result;
 		},
-		reject: function() {
-
+		reject: function(obj, callback) {
+			var result = [];
+			if(Array.isArray(obj)) {
+				for(var i = 0; i < obj.length; i++) {
+					if(!callback(obj[i])) {
+						result.push(obj[i]);
+					}
+				}
+			}
+			else {
+				for
+					(var key in obj) {
+					if(!callback(obj[key])) {
+						result.push(obj[key]);
+					}
+				}
+			}
+			return result;
 		}
 	}
 })();
