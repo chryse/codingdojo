@@ -1,0 +1,47 @@
+.jumbotron {
+	background: url("../images/cat01.jpg") no-repeat center center scroll;
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    color: #fff;
+}
+.items {
+	margin: 0 auto;
+	position: relative;
+}
+
+.items div.item {
+	display: inline-block;
+	width: 200px;
+	height: 150px;
+	margin: 10px;
+}
+
+div.item a,
+div.item img {
+	display: block;
+	position: relative;
+	overflow: hidden;
+	width: 200px;
+	height: 150px;
+}
+
+div.item a div {
+	position: absolute;
+	background: rgba(255, 255, 0, 0.5);
+	width: 200px;
+	height: 150px;
+	padding: 10px;
+	text-align: center;
+	color: white;
+	top: 0%;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+div.item a:hover div {
+	top: 100%;
+}

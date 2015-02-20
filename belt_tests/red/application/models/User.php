@@ -64,6 +64,10 @@ class User extends CI_Model {
 				  NOT IN 
 				  (select followed_id FROM friendships WHERE follower_id = ?)
 				  AND users.id != ?";
+
+				  // "SELECT * FROM users
+				  // LEFT JOIN friendships ON users.id = friendships.followed_id
+				  // WHERE friendships.followed_id = NULL"
 		$value = array($user_id, $user_id);
 		return $this->db->query($query, $value)->result_array();
 	}

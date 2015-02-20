@@ -24,8 +24,7 @@
 						cy		: cy,
 						r 		: Math.ceil(Math.random()*20),
 						style 	: "fill: rgba(" + Math.ceil(Math.random() * 255).toString() + "," + Math.ceil(Math.random() * 255).toString() + "," + Math.ceil(Math.random() * 255).toString() + "," + Math.random() + ")",
-						// style	: "fill: black",
-						isCollided : false
+						// style	: "fill: black"
 					};
 		
 		//private function that generates a random number
@@ -65,39 +64,10 @@
 				this.info.velocity.y = this.info.velocity.y * -1;
 			}
 
-			if(!this.info.isCollided) {
-				this.info.cx += this.info.velocity.x*time;
+			this.info.cx += this.info.velocity.x*time;
 				this.info.cy += this.info.velocity.y*time;
 				el.setAttribute("cx", this.info.cx);
 				el.setAttribute("cy", this.info.cy);
-			}
-			else {
-				// 	var svg = document.getElementById("svg");
-				// console.log(this.info.html_id, svg);
-
-				// if(this.info.html_id !== null) {
-				
-				// 	svg.removeChild(svg.childNodes[this.info.html_id]);	
-				// }
-				// var = this.info.html_id;
-				// if(delete this){
-				// 	el.removeChild(el.childNodes[circles[circle].info.html_id]);
-				// }
-				
-				// el.remove();
-				// this.info.cx = 0;
-				// this.info.cy = 0;
-				// el.setAttribute("cx", this.info.cx);
-				// el.setAttribute("cy", this.info.cy);
-				// el.setAttribute("cx", 0);
-				// el.setAttribute("cy", 0);
-				// document.getElementById("svg#"+this.info.html_id).setAttribute("style", "rgba(0,0,0,0)");
-			}
-
-			
-			console.log(this.info.html_id, this.info.isCollided);
-
-
 		}
 
 		//creates the SVG element and returns it
@@ -117,68 +87,47 @@
 	{
 		var counter = 0;  //counts the number of circles created
 		var circles = []; //array that will hold all the circles created in the app
-		var limitCount = 30;
-
-		// function removeCirce() {
-		// 	for(circle in circles) {
-		// 		if(circles[circle].info.isCollided) {
-		// 			document.getElementById("svg").removeChild(document.getElementById("svg").childNodes[circles[circle].info.html_id]);
-		// 			// delete circles[circle];
-		// 		}	
-		// 	}
-		// }
+		var limitCount = 10000;
 
 		//a loop that updates the circle's position on the screen
 		this.loop = function(){
 
 			if(isClicked && circles.length <= limitCount) {
-				circles[circles.length-1].info.r++;
+				circles[circles.length-1].info.r += 1;
 				document.getElementById(circles[circles.length-1].info.html_id).setAttribute("r", circles[circles.length-1].info.r);
 			}
 
 			var temp = [];
 
 			for(circle in circles) {
-				
-				circles[circle].update(0.5);
-				
+					circles[circle].update(0.5);
 					for(other in circles) {
-						if(circle !== other) {
+						if(circle !== other && circles[circle] !== undefined && circles[other] !== undefined) {
 
-					// 		// circle and other are collided
+					 		// circle and other are collided
 							if(collision(circles[circle], circles[other])) {
-								var el = document.getElementById("svg");
-					// 			// console.log(circles[circle].info.html_id, circles[other].info.html_id, "collide");
-					// 			// delete circles[circle];
+								if(!isClicked) {
+									var el = document.getElementById(circles[circle].info.html_id);
+									el.remove();
+									el = document.getElementById(circles[other].info.html_id);
+									el.remove();
+									delete circles[circle];
+									delete circles[other];	
+								}
 								
-								
-					// 			// delete circles[circle];
-					// 			// ballsCollided.push(a);
-					// 			// var el1 = document.getElementById("svg");
-					// 			// el.removeChild(el.childNodes[circles[other].info.html_id]);
-					// 			// delete circles[other];
-								
-								circles[circle].info.isCollided = true;
-								circles[other].info.isCollided = true;
-								// var id = circles[circle].info.html_id;
-								// if(delete circles[circle]) {
-								// 	el.removeChild(el.childNodes[id]);
-								// }
-								// if(delete circles[other]) {
-
-								// }
-					// 			// delete circles[other];
 							}
 						}
 					}
+
 			}
 		}
 
 		this.createNewCircle = function(x,y){
 			// limit making circles 15
-			if(circles.length <= limitCount) {
+			if(circles.length <= limitCount && isClicked) {
 				var new_circle = new Circle(x,y,counter++);
 				circles.push(new_circle);
+				
 				// console.log('created a new circle!', new_circle);
 			}
 		}
@@ -219,8 +168,8 @@
 		}
 		document.onmousedown = function(e){
 			mousedown_time = getTime();
-			playground.createNewCircle(e.x,e.y);
 			isClicked = true;
+			playground.createNewCircle(e.x,e.y);
 		}
 		document.onmouseup = function(e){
 			time_pressed = getTime() - mousedown_time;

@@ -1,0 +1,12 @@
+h1{
+	size: 3.0em;
+	text-align: center;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+* {
+	color: blue;
+}

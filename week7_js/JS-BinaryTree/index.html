@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Binary Search Tree</title>
+        <script src="binarytree.js" type="text/javascript"></script>
+        <script src="binarytreeex.js" type="text/javascript"></script>
+        <script type="text/javascript">
+					function Btree(v) {
+						var current = {};
+						current.value = v;
+						current.left = null;
+						current.right = null;
+
+						current.add = function(addValue) {
+							if(addValue < current.value) {
+								if(current.left) {
+									return current.left.add(addValue);
+								}
+							}
+							else {
+								current.left = Btree(addValue);
+								return true;
+							}
+						}
+
+					}
+        </script>
+    </head>
+    <body>
+    </body>
+</html>
