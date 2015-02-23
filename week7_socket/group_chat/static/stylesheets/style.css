@@ -1,0 +1,27 @@
+.green {
+	color: green;
+	font-weight: bold;
+}
+
+.red {
+	color: red;
+	font-weight: bold;
+}
+
+.part2 {
+	visibility: hidden;
+}
+
+.user-name {
+	margin: 10px;
+	font-size: 1.5em;
+}
+
+.chat-room {
+	height: 400px;
+	overflow: scroll;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	padding: 20px;
+	margin-bottom: 20px;
+}

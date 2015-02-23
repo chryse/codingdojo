@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Epic Button Game</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/style.css" rel="stylesheet" type="text/css">
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			// console.log($(".number").html());
+			var total_number = "<%= total_number %>";
+			var socket = io.connect();
+
+			socket.emit("current_number", {total_number : total_number});
+
+			$(".press").click(function() {
+				total_number++;
+				socket.emit("increase_number", {total_number : total_number});
+			});
+
+			$(".reset").click(function() {
+				total_number = 0;
+				socket.emit("reset_number", {total_number : total_number});
+			})
+
+			socket.on("announce_current_number", function(data) {
+				total_number = data.s_res;
+				$("span.number").html(total_number);
+			});
+
+			socket.on("server_response", function(data) {
+				total_number = data.s_res
+				$("span.number").html(total_number);
+			});
+		});
+	</script>
+</head>
+<body>
+	<div class="container text-center">
+		<h1>The button has been pushed <span class="number"><%= total_number %></span> time(s)</h1>
+		<div class="input-box">
+			<h4>Push the button to update the count!</h4>
+			<button class="btn btn-primary press">Push the epic button</button>
+		</div>
+		<div class="text-right">
+			<button class="btn btn-danger reset">Reset count</button>
+		</div>
+	</div>
+</html>
