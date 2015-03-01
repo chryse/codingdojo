@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Customers | Store</title>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <style>
+        	.main {margin-top: 50px;}
+        	div.product {
+        		display: inline-block;
+        		width: 200px;
+        		height: 200px;
+        		margin: 10px;
+        	}
+        </style>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js" type="text/javascript"></script>
+		<script src="https://code.angularjs.org/1.3.14/angular-route.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+		angular.module("myApp", ["ngRoute"])
+
+		.config(function($routeProvider) {
+			$routeProvider
+			.when("/", {
+				templateUrl: "/dashboard.html",
+				controller: "dashboardCtrl"
+			})
+			.when("/products", {
+				templateUrl: "/products.html",
+				controller: "productCtrl"
+			})
+			.when("/orders", {
+				templateUrl: "/orders.html",
+				controller: "orderCtrl"
+			})
+			.when("/customers", {
+				templateUrl: "/customers.html",
+				controller: "customerCtrl"
+			})
+			.otherwise({
+				redirectTo: "/"
+			})
+		})
+
+		.controller("dashboardCtrl", function($scope, productFactory, customerFactory, orderFactory) {
+			console.log("dashboardCtrl triggered");
+
+			$scope.predicate = "-created_at";
+			$scope.productLimit = 4;
+			$scope.orderLimit = 3;
+			$scope.customerLimit = 3;
+			$scope.productShow = true;
+			$scope.orderShow = true;
+			$scope.customerShow = true;
+
+			productFactory.readProduct(function(result) {
+				$scope.products = result;
+			});
+
+			customerFactory.readCustomer(function(result) {
+				$scope.customers = result;
+			});
+
+			orderFactory.readOrder(function(result) {
+				$scope.orders = result;
+			});
+
+			$scope.showMore = function(where) {
+				if(where == "productMore") {
+					$scope.productLimit = 10;
+					$scope.productShow = false;
+				}
+				else if (where == "productLess") {
+					$scope.productLimit = 4;
+					$scope.productShow = true;
+				}
+				else if (where == "orderMore") {
+					$scope.orderLimit = 10;
+					$scope.orderShow = false;
+				}
+				else if (where == "orderLess") {
+					$scope.orderLimit = 3;
+					$scope.orderShow = true;
+				}
+				else if (where == "customerMore"){
+					$scope.customerLimit = 10;
+					$scope.customerShow = false;
+				}
+				else if (where == "customerLess"){
+					$scope.customerLimit = 3;
+					$scope.customerShow = true;
+				}
+			}
+
+		})
+
+		.controller("productCtrl", function($scope, productFactory) {
+			console.log("productCtrl triggered");
+
+			$scope.predicate = "-created_at";
+
+			productFactory.readProduct(function(result) {
+				$scope.products = result;
+			})
+
+			$scope.createProduct = function(newProduct) {
+				console.log("createProduct clicked");
+				productFactory.createProduct(newProduct, function(result) {
+					$scope.products = result;
+					$scope.newProduct = {};
+				})
+			}
+
+			$scope.deleteProduct = function(selectedProduct) {
+				productFactory.deleteProduct(selectedProduct)
+			}
+		})
+
+		.controller("customerCtrl", function($scope, customerFactory) {
+			console.log("customerCtrl triggers!");
+
+			$scope.error = false;
+			$scope.newCustomer = {};
+
+			customerFactory.readCustomer(function(result) {
+				$scope.customers = result;
+			});
+
+			$scope.createCustomer = function(newCustomer) {
+
+				$scope.error = false;
+				for(customer in $scope.customers) {
+					if(newCustomer.name == $scope.customers[customer].name) {
+						$scope.error = true;
+					}
+				}
+
+				if(!$scope.error && newCustomer.name !== undefined) {
+					customerFactory.createCustomer(newCustomer, function(result) {
+						$scope.customers = result;
+						$scope.newCustomer = {};
+					});	
+				}
+
+				$scope.newCustomer = {};
+				
+			};
+
+			$scope.deleteCustomer = function(selectedCustomer) {
+				customerFactory.deleteCustomer(selectedCustomer);
+			};
+		})
+
+		.controller("orderCtrl", function($scope, orderFactory, customerFactory, productFactory) {
+			console.log("orderCtrl triggers!");
+			customerFactory.readCustomer(function(result) {
+				$scope.customers = result;
+			});
+			productFactory.readProduct(function(result) {
+				$scope.products = result;
+			});
+			orderFactory.readOrder(function(result) {
+				$scope.orders = result;
+			});
+
+			$scope.createOrder = function(newOrder) {
+				console.log(newOrder);
+				orderFactory.createOrder(newOrder, function(result) {
+					$scope.orders = result;
+					$scope.newOrder = {};
+				});
+			};
+		})
+
+		.factory("customerFactory", function($http) {
+			var factory = {};
+			var customers = [];
+
+			factory.createCustomer = function(newCustomer, callback) {
+				$http.post("/customers", newCustomer).success(function(result) {
+					customers.push(result);
+					callback(customers);
+				});
+			};
+
+			factory.readCustomer = function(callback) {
+				$http.get("/customers").success(function(result) {
+					customers = result;
+					callback(customers);
+				});
+			};
+
+			factory.deleteCustomer = function(selectedCustomer, callback) {
+				$http({
+					method: "DELETE",
+					url: "/customers/" + selectedCustomer._id
+				}).success(function(result) {
+					customers.splice(customers.indexOf(selectedCustomer), 1);
+				});
+			};
+
+			return factory;
+		})
+
+		.factory("orderFactory", function($http) {
+			var factory = {};
+			var orders = [];
+
+			factory.createOrder = function(newOrder, callback) {
+				$http.post("/orders", newOrder).success(function(result) {
+					console.log(result);
+					orders.push({
+						name 		: result._customer.name,
+						productName : result._product.productName,
+						quantity	: result.quantity,
+						created_at	: result.created_at
+					})
+					callback(orders);
+				});
+			};
+
+			factory.readOrder = function(callback) {
+				$http.get("/orders").success(function(result) {
+					// console.log(result);
+					var freshData = [];
+					for(order in result) {
+						freshData.push({
+							name 		: result[order]._customer.name,
+							productName : result[order]._product.productName,
+							quantity	: result[order].quantity,
+							created_at	: result[order].created_at
+						})
+					}
+					orders = freshData;
+					callback(orders);
+				});
+			};
+
+			return factory;
+		})
+
+		.factory("productFactory", function($http) {
+			var factory = {};
+			var products = [];
+
+			factory.createProduct = function(newProduct, callback) {
+				$http.post("/products", newProduct).success(function(result) {
+					products.push(result);
+					callback(products);
+				});
+			};
+
+			factory.readProduct = function(callback) {
+				$http.get("/products").success(function(result) {
+					products = result;
+					callback(products);
+				});
+			};
+
+			factory.deleteProduct = function(selectedProduct) {
+				$http({
+					method: "DELETE",
+					url: "/products/" + selectedProduct._id
+				}).success(function(result) {
+					products.splice(products.indexOf(selectedProduct), 1);
+				});
+			}
+
+			return factory;
+		})
+		</script>
+    </head>
+    <body>
+    <div class="container">
+    	<div class="head">
+    		<a href="#/">Dashboard</a> | <a href="#products">Products</a> | <a href="#orders">Orders</a> | <a href="#customers">Customers</a>
+    	</div>
+    	<!-- <div ng-view></div> -->
+    	<ng-view>
+    </div>
+    </body>
+</html>

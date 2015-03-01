@@ -1,0 +1,34 @@
+<div class="row main">
+	<div class="col-md-2">
+		<input class="form-control" placeholder="search">
+	</div>
+	<div class="col-md-10">
+		<div class="product text-center" ng-repeat="product in products | orderBy: predicate | limitTo: productLimit">
+			<img ng-src="{{product.imageUrl}}">
+			<h5>{{product.productName}}</h5>
+			<p>({{product.inventory}} left)</p>
+		</div>
+		<p class="text-center" ng-show="productShow"><a ng-click="showMore('productMore')">Show more</a></p>
+		<p class="text-center" ng-hide="productShow"><a ng-click="showMore('productLess')">Show less</a></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-2">
+		<h3>Recent Orders</h3>
+		<ul>
+			<li ng-repeat="order in orders | orderBy: predicate | limitTo: orderLimit">{{order.name}} purchased {{order.quantity}} {{order.productName}}... {{order.created_at | date : "MMMM dd yyyy"}}</li>
+		</ul>
+		<p class="text-center" ng-show="orderShow"><a ng-click="showMore('orderMore')">Show more</a></p>
+		<p class="text-center" ng-hide="orderShow"><a ng-click="showMore('orderLess')">Show less</a></p>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-10 col-md-offset-2">
+		<h3>New Customers</h3>
+		<ul>
+			<li ng-repeat="customer in customers | orderBy: predicate | limitTo: customerLimit">{{customer.name}} joined the store. {{customer.created_at | date: "MMMM dd yyyy"}}</li>
+		</ul>
+		<p class="text-center" ng-show="customerShow"><a ng-click="showMore('customerMore')">Show more</a></p>
+		<p class="text-center" ng-hide="customerShow"><a ng-click="showMore('customerLess')">Show less</a></p>
+	</div>
+</div>

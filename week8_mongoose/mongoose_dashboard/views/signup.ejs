@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Signup</title>
+    <meta charset="utf-8">
+    <link href="/assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link href="/assets/css/style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<header class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="/" class="navbar-brand">Dashboard</a>
+				</div>
+				<div class="navbar-right">
+					<nav>
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="/">Home</a>
+							</li>
+							<li>
+								<a href="/signin">Sign in</a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="container padding-top">
+		<div class="col-md-6">
+			<h1 class="text-left">Sign up</h1>
+			
+			<form method="post" action="/signup">
+				<div class="form-group">
+					<label>Email Address:</label>
+					<input class="form-control" name="email" type="email" placeholder="email">
+				</div>
+				<div class="form-group">
+					<label>First Name:</label>
+					<input class="form-control" name="first_name" type="text" placeholder="first name">
+				</div>
+				<div class="form-group">
+					<label>Last Name:</label>
+					<input class="form-control" name="last_name" type="text" placeholder="last name">
+				</div>
+				<div class="form-group">
+					<label>Password:</label>
+					<input class="form-control" name="password" type="password" placeholder="password">
+				</div>
+				<div class="form-group">
+					<label>Password Confirmation:</label>
+					<input class="form-control" name="confirm_password" type="password" placeholder="password confirmation">
+				</div>
+				<div class="form-group text-right">
+					<input type="hidden" name="action" value="signup">
+					<button type="submit" class="btn btn-primary">Sign Up</button>
+				</div>
+				<p><a href="/signin">Already have an account? Login</a></p>
+			</form>
+		</div>
+	</div>
+
+	<footer>
+		<div class="clearfix"></div>
+		<div class="container footer">
+			<div class="row">
+				<p>Developed & Designed by <a href="http://hyunjunkim.com" target="_blank">Hyunjun Kim</a> from the scratch<br />
+				Copyright © Jun Kim 2015 All rights reserved.</p>
+				<ul>
+				  <li><a href="/about">About</a></li>
+				  <li><a href="/contact">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</footer>
+</body>
+</html>

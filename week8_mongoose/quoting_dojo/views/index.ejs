@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Welcome to Quoting Dojo</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		.bg-info {
+			padding: 10px;
+			margin: 10px;
+			border-radius: 5px;
+		}
+		.add {
+			
+			display: inline-block;
+		}
+		.skip {
+			float: right;
+			/*margin-top: -50px;*/
+			
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<h1 class="text-center">Welcome to Quoting Dojo</h1>
+			<div class="col-md-6 col-md-offset-3">
+				<% if(typeof(errors) != "undefined") {
+				%>
+					<div class="bg-info">
+				<%
+					for(var x in errors) {
+				%>
+						<p><%= errors[x].message %></p>
+				<%
+					}
+				%>
+					</div>
+				<%
+				} %>
+				<form class="form-horizontal" action="/main" method="post">
+					<div class="form-group">
+						<label class="col-md-3 label-control">Your Name:</label>
+						<div class="col-md-9">
+							<input class="form-control" type="text" name="name">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-3 label-control">Your Quote</label>
+						<div class="col-md-9">
+							<textarea name="quote" rows="5" class="form-control"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-9 col-md-offset-3">
+							<button type="submit" class="btn btn-primary add">Add my quote!</button>	
+						</div>
+					</div>
+				</form>
+				<a href="/main"><button class="btn btn-warning skip">Skip to quote!</button></a>
+				
+			</div>
+		</div>
+	</div>
+</body>
+</html>
