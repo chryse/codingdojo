@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Customer = mongoose.model("Customer");
+var Order = mongoose.model("Order");
 
 module.exports =(function() {
 	return {
@@ -22,7 +23,9 @@ module.exports =(function() {
 			// console.log(req.params.id);
 			Customer.remove({_id: req.params.id}, function(err) {
 				if(!err) {
-					res.end();
+					Order.remove({_customer: req.params.id}, function(err) {
+						res.end();	
+					})
 				}
 			});
 		}

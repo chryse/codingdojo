@@ -1,0 +1,36 @@
+<div class="row main">
+	<div class="col-md-2">
+		<input ng-model="query" class="form-control" placeholder="search..."><br />
+		<!-- <button class="btn btn-primary">Search</button> -->
+		<h4>Add a new product</h4>
+		<div class="form-group">
+			<label>Name:</label></br>
+			<input class="form-control" ng-model="newProduct.productName" placeholder="name...">
+		</div>
+		<div class="form-group">
+			<label>Image(url):</label></br>
+			<input class="form-control" ng-model="newProduct.imageUrl" placeholder="http://...">
+		</div>
+		<div class="form-group">
+			<label>Description:</label></br>
+			<textarea class="form-control" ng-model="newProduct.description"></textarea>
+		</div>
+		<div class="form-group">
+			<label>Initial Quantity:</label><br />
+			<select ng-model="newProduct.inventory" class="form-control"> 
+				<option ng-repeat="count in [10,20,30,40,50,60,70]" value="{{count}}">{{count}}</option>
+			</select>
+		</div>
+		<div class="form-group text-right">
+			<button class="btn btn-primary" ng-click="createProduct(newProduct)">Create</button>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div class="product text-center" ng-repeat="product in products | filter: query | orderBy: predicate">
+			<img ng-src="{{product.imageUrl}}">
+			<h5>{{product.productName}}</h5>
+			<p>({{product.inventory}} left)</p>
+			<p><button class="btn btn-danger" ng-click="deleteProduct(product)">del</button></p>
+		</div>
+	</div>
+</div>

@@ -2,10 +2,10 @@
 <html lang="en" ng-app="myApp">
     <head>
         <meta charset="utf-8">
-        <title>Customers | Store</title>
+        <title>Spa | Store</title>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" type="text/css">
         <style>
-        	.main {margin-top: 50px;}
+        	.main {margin-top: 80px;}
         	div.product {
         		display: inline-block;
         		width: 200px;
@@ -270,12 +270,41 @@
 		</script>
     </head>
     <body>
+    <header class="navbar navbar-fixed-top navbar-inverse">
+		<div class="navbar-inner">
+			<div class="container">
+				<div class="navbar-header">
+					<a href="#/" class="navbar-brand">Spa Store</a>
+				</div>
+				<div class="navbar-right">
+					<nav>
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="#/">Dashboard</a>
+							</li>
+							<li>
+								<a href="#products">Products</a>
+							</li>
+							<li>
+								<a href="#orders">Orders</a>
+							</li>
+							<li>
+								<a href="#customers">Customers</a>
+							</li>
+							<!-- <li>
+								<a href="/">Home</a>
+							</li>
+							<li>
+								<a href="/signin">Sign in</a>
+							</li> -->
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
     <div class="container">
-    	<div class="head">
-    		<a href="#/">Dashboard</a> | <a href="#products">Products</a> | <a href="#orders">Orders</a> | <a href="#customers">Customers</a>
-    	</div>
-    	<!-- <div ng-view></div> -->
-    	<ng-view>
+    	<div ng-view></div>
     </div>
     </body>
 </html>

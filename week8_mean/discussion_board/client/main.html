@@ -1,0 +1,10 @@
+<h1>Hello!<br />Please enter your name to join and share your ideas</h1>
+<div class="col-md-4">
+	<div class="bg-danger" ng-if="error">{{errorMessage}}</div>
+	<div class="form-group">
+		<input class="form-control" ng-model="newUser.name" placeholder="type your name...">
+	</div>
+	<div class="form-group text-right">
+		<button class="btn btn-primary" ng-click="createUser(newUser)">Enter</button>
+	</div>
+</div>

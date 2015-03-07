@@ -1,0 +1,60 @@
+<div class="row main">
+	<div class="text-right">
+		<input type="text" ng-model="query">
+	</div>
+	<div class="col-md-12">
+		<table class="table table-striped table-hover">
+			<thead>
+				<tr>
+					<th>Category</th>
+					<th>Topic</th>
+					<th>User Name</th>
+					<th>Posts</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="topic in topics">
+					<td>{{topic.category}}</td>
+					<td>{{topic.title}}</td>
+					<td>{{topic.userName}}</td>
+					<td>{{topic.postsNum}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<h3>Add a new Topic</h3>
+	<div class="row form-group">
+		<div class="col-md-1">
+			<label>Topic:</label>
+		</div>
+		<div class="col-md-4">
+			<input ng-model="newTopic.title" class="form-control">
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-md-1">
+			<label>Description:</label>
+		</div>
+		<div class="col-md-4">
+			<textarea ng-model="newTopic.description" class="form-control" rows="4"></textarea>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="col-md-1">
+			<label>Category</label>
+		</div>
+		<div class="col-md-4">
+			<select ng-model="newTopic.category" class="form-control">
+				<option>Ruby on Rails</option>
+				<option>MySQL</option>
+				<option>UX</option>
+				<option>Web Development</option>
+			</select>
+		</div>
+	</div>
+	<div class="row form-group">
+		<div class="text-right col-md-5">
+			<button class="btn btn-success" ng-click="createTopic(newTopic)">Submit</button>
+		</div>
+	</div>
+</div>
