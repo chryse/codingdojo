@@ -1,0 +1,30 @@
+<% provide(:title, "Edit event") %>
+
+<div class="row">
+	<h3>Add Event</h3>
+	<div class="col-md-4">
+		<%= form_for(@event) do |f| %>
+
+			<div class="col-sm-12 form-group">
+				<%= f.label :name, "Name:" %>
+				<%= f.text_field :name, class: "form-control" %>
+			</div>
+			<div class="col-sm-12 form-group">
+				<%= f.label :date, "Date:" %>
+				<%= f.date_field :date, class: "form-control" %>
+			</div>
+			<div class="col-sm-6 form-group">
+				<%= f.label :location, "Location" %>
+				<%= f.text_field :location, class: "form-control" %>
+			</div>
+			<div class="col-sm-6 form-group">
+				<%= f.label :state, "state" %>
+				<%= f.select :state, ["AL", "MA", "CA"], { include_blank: "Select State"}, { :class => "form-control" } %>
+			</div>
+			<div class="col-sm-12 form-group text-right">
+				<%= f.submit "Edit Event", class: "btn btn-primary" %>
+			</div>
+
+		<% end %>
+	</div>
+</div>

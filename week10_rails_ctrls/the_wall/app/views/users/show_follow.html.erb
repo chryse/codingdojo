@@ -1,0 +1,32 @@
+<% provide(:title, @title) %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <h3><%= @user.full_name %> <%= link_to "view my profile", @user %> </h3>
+      <p class="text-right">Posts: <%= @user.posts.count %></p>
+      <%= render 'shared/relationship_info' %>    
+    </div>
+
+    <div class="col-md-8">
+      <h3><%= @title %></h3>
+      <% if @users.any? %>
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Registered Date</th>
+            </tr>
+          </thead>
+          <tbody>
+          <%= render @users %>
+          <tbody>
+        </table>
+
+        <%= will_paginate %>
+      <% end %>
+    </div>
+  </div>
+</div>

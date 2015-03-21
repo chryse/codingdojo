@@ -1,0 +1,2 @@
+module GreatGameHelper
+end

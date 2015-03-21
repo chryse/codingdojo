@@ -1,0 +1,25 @@
+1. User.first should retrieve the first user information
+	User.first
+
+2. User.first.friends should display all the friend information of the first user (this should include the first name and last name of all the friends of User.first).
+	User.first.friends
+
+3. Find out how you can retrieve all users who is NOT a friend with the first User.
+	User.find_by_sql(
+	"SELECT users.first_name, users.id FROM users LEFT JOIN friendships ON users.id = friendships.user_id
+WHERE users.id NOT IN(SELECT friend_id FROM friendships WHERE friendships.user_id = 1) AND users.id !=1"
+)
+
+user = User.first
+friend_ids = user.friendships.select("friend_id")
+friends = user.friendships
+others = User.where("user_id != ?", friend_ids)
+
+User.find(:all, :conditions => { :user_id => @forums.map(&:id) })
+
+User.where('id not in (?)', friends_ids.to_a)
+others = User.where("id not in( ?)", [2,3]).where("id != ?", user.id)
+others = User.where("id not in( ?)", a).where("id != ?", user.id)
+
+User.find(:all, :conditions => { :user_id => user.friendships(&:friend_id) })
+User.find(:all, :conditions => { :user_id => 1 })

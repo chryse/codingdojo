@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Random Word Generator</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 text-center">
+				<h1>Random Word (attempt # <%= session[:count] %>)</h1>
+				<div class="result"><%= session[:result] %></div>
+				<a href="/create/">
+					<button class="btn btn-primary">Generate</button>
+				</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

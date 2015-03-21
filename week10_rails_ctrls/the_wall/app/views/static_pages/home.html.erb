@@ -1,0 +1,42 @@
+<% if signed_in? %>
+	<% provide(:title, current_user.full_name) %>
+	<div class="container">
+		<div class="row">
+			<aside class="col-md-4">
+				<%= render "shared/user_info" %>
+				<%= render "shared/relationship_info" %>
+			</aside>
+			<div class="col-md-8">
+				<h3></h3>
+				<%= render "shared/post_form" %>
+				<%= render "shared/feed" %>
+			</div>
+		</div>
+	</div>
+<% else %>
+	<% provide(:title, "Home") %>
+	<div class="main-view">
+		<div class="text-vertical-center">
+			<h1>Welcome to Junbook</h1>
+			<h2>Share your life with your friends and enjoy your moments</h2>
+			<a class="btn btn-large btn-info" href="/signup/">Sign up now!</a>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 text-center">
+				<h3>Manage User</h3>
+				<p>Using this application, you'll learn how to add, remove, and edit users for the application</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<h3 class="text-center">Leave messages</h3>
+				<p>Users will be able to leave a message to another user using this application.</p>
+			</div>
+			<div class="col-md-4 text-center">
+				<h3>Edit User Information</h3>
+				<p>Admins will be able to edit another user's information (email address, first name, last name, etc).</p>
+			</div>
+		</div>
+	</div>
+<% end %>

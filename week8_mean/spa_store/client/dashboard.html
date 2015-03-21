@@ -1,9 +1,9 @@
 <div class="row main">
 	<div class="col-md-2">
-		<input class="form-control" placeholder="search">
+		<input class="form-control" placeholder="search" ng-model="query">
 	</div>
 	<div class="col-md-10">
-		<div class="product text-center" ng-repeat="product in products | orderBy: predicate | limitTo: productLimit">
+		<div class="product text-center" ng-repeat="product in products | orderBy: predicate | limitTo: productLimit | filter: query">
 			<img ng-src="{{product.imageUrl}}">
 			<h5>{{product.productName}}</h5>
 			<p>({{product.inventory}} left)</p>

@@ -1,0 +1,33 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1>Product <%= @product.id %></h1>
+			<table class="table table-striped">
+				<tr>
+					<td>Name:</td>
+					<td><%= @product.name %></td>
+				</tr>
+				<tr>
+					<td>Description:</td>
+					<td><%= @product.description %></td>
+				</tr>
+				<tr>
+					<td>Price:</td>
+					<td>$<%= @product.price %></td>
+				</tr>
+				<tr>
+					<td>Category:</td>
+					<td><%= @category.name %></td>
+				</tr>
+			</table>
+			<p class="text-right">
+				<a href="/products/<%= @product.id %>/edit/">Edit</a> | <a href="/products/">Back</a>
+			</p>
+			<h2><%= pluralize(@product.comments.count, "Comment") %></h2>
+			<%= render "comments/new" %>
+			<ul>
+				<%= render @comments %>
+			</ul>
+		</div>
+	</div>
+</div>

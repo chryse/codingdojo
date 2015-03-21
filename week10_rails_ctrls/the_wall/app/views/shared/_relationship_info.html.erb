@@ -1,0 +1,17 @@
+<!-- Since we will be including the stats on both the user show pages and the home page, 
+the first line of Listing 12.16 picks the right one using -->
+<% @user ||= current_user %>
+<div class="relationship-info">
+  <a href="<%= following_user_path(@user) %>">
+    <strong id="following">
+      <%= @user.following.count %>
+    </strong>
+    following
+  </a>
+  <a href="<%= followers_user_path(@user) %>">
+    <strong id="followers">
+      <%= @user.followers.count %>
+    </strong>
+    followers
+  </a>
+</div>

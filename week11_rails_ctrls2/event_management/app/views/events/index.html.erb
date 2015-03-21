@@ -1,0 +1,121 @@
+<% provide(:title, "Events") %>
+<div class="row">
+</div>
+<div class="row">
+	<h1>Welcome <%= current_user.full_name %>
+	<h3>Here are some of the evnets at your state:</h3>
+	<table class="table table-stripted">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Host</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @events.each do |event| %>
+			<tr>
+				<td><%= link_to event.name, event %></td>
+				<td><%= event.format_date %></td>
+				<td><%= event.location %></td>
+				<td><%= event.user.full_name %></td>
+				<td>
+					<% if event.user_id == current_user.id %>
+						<%= link_to "Edit", edit_event_path(event), class:"btn btn-warning" %>
+						<%= link_to "Delete", event, method: :delete, data: { confirm: "You sure?" }, class:"btn btn-danger" %>
+					<% else %>
+						<% if !current_user.joining?(event) %>
+							<%= form_for(current_user.relationships.build) do |f| %>
+								<%= f.hidden_field :user_id, value: current_user.id %>
+								<%= f.hidden_field :event_id, value: event.id %>
+								<%= f.submit "Join", class: "btn btn-info" %>
+							<% end %>
+						<% else %>
+							<%= form_for(current_user.relationships.find_by(event_id: event.id),
+	             html: { method: :delete }) do |f| %>
+							<%= f.submit "Cancel", class: "btn btn-danger" %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<h1></h1>
+<div class="row">
+
+	<h3>Here are some of the events on other states:</h3>
+	<table class="table table-stripted">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Date</th>
+				<th>Location</th>
+				<th>Host</th>
+				<th>Action</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @other_events.each do |event| %>
+			<tr>
+				<td><%= link_to event.name, event %></td>
+				<td><%= event.format_date %></td>
+				<td><%= event.location %></td>
+				<td><%= event.user.full_name %></td>
+				<td>
+					<% if event.user_id == current_user.id %>
+						<%= link_to "Edit", edit_event_path(event), class:"btn btn-warning" %>
+						<%= link_to "Delete", event, method: :delete, data: { confirm: "You sure?" }, class:"btn btn-danger" %>
+					<% else %>
+						<% if !current_user.joining?(event) %>
+							<%= form_for(current_user.relationships.build) do |f| %>
+								<%= f.hidden_field :user_id, value: current_user.id %>
+								<%= f.hidden_field :event_id, value: event.id %>
+								<%= f.submit "Join", class: "btn btn-info" %>
+							<% end %>
+						<% else %>
+							<%= form_for(current_user.relationships.find_by(event_id: event.id),
+	             html: { method: :delete }) do |f| %>
+							<%= f.submit "Cancel", class: "btn btn-danger" %>
+							<% end %>
+						<% end %>
+					<% end %>
+				</td>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<h3>Add Event</h3>
+	<div class="col-md-4">
+		<%= form_for(@event) do |f| %>
+
+			<div class="col-sm-12 form-group">
+				<%= f.label :name, "Name:" %>
+				<%= f.text_field :name, class: "form-control" %>
+			</div>
+			<div class="col-sm-12 form-group">
+				<%= f.label :date, "Date:" %>
+				<%= f.date_field :date, class: "form-control" %>
+			</div>
+			<div class="col-sm-6 form-group">
+				<%= f.label :location, "Location" %>
+				<%= f.text_field :location, class: "form-control" %>
+			</div>
+			<div class="col-sm-6 form-group">
+				<%= f.label :state, "state" %>
+				<%= f.select :state, ["AL", "MA", "CA"], { include_blank: "Select State"}, { :class => "form-control" } %>
+			</div>
+			<div class="col-sm-12 form-group text-right">
+				<%= f.submit "Add Event", class: "btn btn-primary" %>
+			</div>
+
+		<% end %>
+	</div>
+</div>
+

@@ -1,0 +1,19 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+.comment-box {
+	height: 300px;
+	border: 1px solid #aaa;
+	overflow: scroll;
+	padding: 20px;
+
+	p {
+		padding-bottom: 5px;
+		margin-bottom: 10px;
+		border-bottom: 1px solid #aaa;
+	}
+}
+
+.detail {
+	line-height: 1.5em;
+}

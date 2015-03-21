@@ -1,0 +1,40 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1>Edit Product</h1>
+			<form class="form" action="/products/<%= @product.id %>" method="post">
+
+				<!-- error message partial view -->
+				<%= render "shared/error_messages", object: @product %>
+
+				<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+				<input type="hidden" name="_method" value="put">
+				<div class="col-sm-12 form-group">
+					<label>Category</label>
+					<select class="form-control" name="product[category_id]">
+						<option value="<%= @category.id %>"><%= @category.name %></option>
+						<% @categories.each do |category| %>
+						<option value="<%= category.id %>"><%= category.name %></option>
+						<% end %>
+					</select>
+				</div>
+				<div class="col-sm-12 form-group">
+					<label>Name</label>
+					<input type="text" name="product[name]" class="form-control" value="<%= @product.name %>">
+				</div>
+				<div class="col-sm-12 form-group">
+					<label>Description</label>
+					<input type="text" name="product[description]" class="form-control" value="<%= @product.description %>">
+				</div>
+				<div class="col-sm-12 form-group">
+					<label>Price</label>
+					<input type="text" name="product[price]" class="form-control" value="<%= @product.price %>">
+				</div>
+				<div class="col-sm-12 form-group">
+					<button type="submit" class="btn btn-primary">Update</button>
+				</div> 
+			</form>
+			<a href="/products/">Show</a> | <a href="/products/show/<%= @product.id %>">Back</a>
+		</div>
+	</div>
+</div>

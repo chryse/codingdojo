@@ -1,0 +1,23 @@
+<div class="container">
+	<div class="row">
+		<h1>All Comments</h1>
+		<table class="table table-strip table-hover">
+			<thead>
+				<tr>
+					<th>Comments</th>
+					<th>Products</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @comments.each do |comment| %>
+				<tr>
+					<td><%= comment.comment %></td>
+					<td><%= comment.name %></td>
+					<td><%= DateTime.parse(comment.c_created_at).strftime("%b %d, %Y %H:%M:%S") %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<a href="/products/">Back</a>
+	</div>
+</div>

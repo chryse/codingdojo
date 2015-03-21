@@ -1,0 +1,32 @@
+<div class="container">
+	<div class="row">
+		<h1>Listing Products</h1>
+		<table class="table table-strip table-hover">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Category</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @products.each do |product| %>
+				<tr>
+					<td><%= product.name %></td>
+					<td><%= product.description %></td>
+					<td>$ <%= product.price %></td>
+					<td><%= product.c_name %></td>
+					<td>
+						<a href="/products/show/<%= product.p_id %>"><button class="btn btn-primary">Show</button></a>
+						<a href="/products/<%= product.id %>/edit"><button class="btn btn-warning">Edit</button></a>
+						<a href="/products/<%= product.id %>" data-method="delete"><button class="btn btn-danger">Destroy</button></a>
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+		<a href="/products/new/">New Product</a>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+<tr>
+	<td>
+		<%= link_to (user.first_name + " " + user.last_name), user %>
+	</td>
+	<td>
+		<%= mail_to user.email, user.email %>
+	</td>
+	<td>
+		<%= user.format_created_date %>
+	</td>
+</tr>

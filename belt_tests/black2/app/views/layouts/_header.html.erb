@@ -1,0 +1,13 @@
+<header class="navbar">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if signed_in? %>
+          <li><%= link_to "Bright Ideas", "/bright_ideas/" %></li>
+          <li><%= link_to "Sign out", signout_path %></li>
+        <% end %>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>

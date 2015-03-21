@@ -1,0 +1,12 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<p>First Name: <%= @user.first_name %></p>
+			<p>Last Name: <%= @user.last_name %></p>
+			<p>Email: <%= @user.email_address %></p>
+			<p>
+				<a href="/users/<%= @user.id %>/edit/">Edit</a> | <a href="/users/">Back</a>
+			</p>
+		</div>
+	</div>
+</div>

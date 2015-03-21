@@ -1,0 +1,83 @@
+Implement the following validations
+
+1. require the presence of name and description for the blog
+
+	class Blog < ActiveRecord::Base
+		has_many :posts, dependent: :destroy
+
+		validates :name, :description, presence: true
+	end
+
+2. require the presence of title and content for the posts, require the title to be at least 7 characters long
+
+	class Post < ActiveRecord::Base
+	  belongs_to :blog
+	  has_many :messages, dependent: :destroy
+
+	  validates :title, :content, length: { minimum: 7 }
+	  validates :content, presence: true
+	end
+
+3. require author and message for the messages. Require the message to be at least 15 characters long.
+
+	class Message < ActiveRecord::Base
+	  belongs_to :post
+
+	  validates :author, presence: true
+	  validates :message, presence: true, length: { minimum: 15 }
+	end
+
+
+IMPORTANT INFO: When you do any of these assignments in this chapter, you should NEVER reference the foreign key.  For example, Post.create(blog_id: 5, ...) is BAD!  You should instead do something like this: Post.create(blog: Blog.find(5)).  Always remember that if you're referencing a foreign key, you're not doing something right!
+
+
+Using the console
+
+1. create 5 new blogs
+	Blog.new(name: "blog1", description: "description1").save
+	Blog.new(name: "blog2", description: "description2").save
+	Blog.new(name: "blog3", description: "description3").save
+	Blog.new(name: "blog4", description: "description4").save
+	Blog.new(name: "blog5", description: "description5").save
+
+2. create several posts for each blog
+	Blog.find(1).posts.create(title: "blog1 title1", content: "blog1 content1")
+	Blog.find(2).posts.create(title: "blog2 title1", content: "blog2 content1")
+	Blog.find(2).posts.create(title: "blog2 title2", content: "blog2 content2")
+	Blog.find(3).posts.create(title: "blog3 title1", content: "blog3 content1")
+	Blog.find(3).posts.create(title: "blog3 title2", content: "blog3 content2")
+	Blog.find(3).posts.create(title: "blog3 title3", content: "blog3 content3")
+	Blog.find(4).posts.create(title: "blog4 title1", content: "blog4 content1")
+	Blog.find(4).posts.create(title: "blog4 title2", content: "blog4 content2")
+	Blog.find(4).posts.create(title: "blog4 title3", content: "blog4 content3")
+	Blog.find(4).posts.create(title: "blog4 title4", content: "blog4 content4")
+	Blog.find(5).posts.create(title: "blog5 title1", content: "blog5 content1")
+	Blog.find(5).posts.create(title: "blog5 title2", content: "blog5 content2")
+
+3. create several messages for the first post
+	Post.find(1).messages.create(author: "Jun", message: "message1 message1 message1 message1")
+	Post.find(1).messages.create(author: "Claire", message: "message2 message2 message2 message2 message2")
+	Post.find(1).messages.create(author: "Michael", message: "message3 message3 message3 message3 message3")
+
+4. know how to retrieve all posts for the first blog
+	Blog.first.posts
+
+5. know how to retrieve all posts for the last blog (sorted by title in the DESC order)
+	Blog.last.posts
+
+6. know how to update the first post's title
+	Post.first.update(title: "update title")
+
+7. know how to delete the third post (have the model automatically delete all messages associated with the third post when you delete the third post)
+	has_many :messages, dependent: :destroy
+	
+	Post.find(3).destroy
+	
+
+8. know how to retrieve all blogs
+	Blog.all
+
+9. know how to retrieve all blogs whose id is less than 5
+	Blog.where("id < 5")
+
+10. think of other potential information you may need for this application and get comfortable being able to pull information using the console

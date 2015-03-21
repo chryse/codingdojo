@@ -1,0 +1,205 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+/* mixins, variables, etc. */
+
+$gray-medium-light: #eaeaea;
+
+@mixin box_sizing {
+  -moz-box-sizing:    border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing:         border-box;
+}
+
+/* universal */
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  margin-top: 50px;
+}
+
+section {
+  overflow: auto;
+}
+
+.main-view {
+  display: table;
+  /*position: relative;*/
+  width: 100%;
+  height: 100%;
+  background: url(/assets/bg.jpg) no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background: cover;
+
+  .text-vertical-center {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: #fff;
+    text-shadow: 2px 2px 5px rgba(150, 150, 150, 1);
+
+    h1 {
+      font-size: 5.0em;
+      font-weight: 700;
+    }
+
+    h2 {
+      font-size: 2.0em;
+      color: #eee;
+      margin: 30px 0;
+    }
+  }
+}
+
+
+/* typography */
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1;
+}
+
+h1 {
+  font-size: 3em;
+  letter-spacing: -2px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1.2em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: normal;
+  color: $gray-light;
+}
+
+p {
+  font-size: 1.1em;
+  line-height: 1.7em;
+}
+
+
+/* header */
+
+#logo {
+  float: left;
+  margin-right: 10px;
+  font-size: 1.7em;
+  color: white;
+  /*text-transform: uppercase;*/
+  letter-spacing: 1px;
+  padding-top: 9px;
+  /*font-weight: bold; */
+  &:hover {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid $gray-medium-light;
+  color: $gray-light;
+  a {
+    color: $gray;
+    &:hover {
+      color: $gray-darker;
+    }
+  }
+  small {
+    float: left;
+  }
+  ul {
+    float: right;
+    list-style: none;
+    li {
+      float: left;
+      margin-left: 15px;
+    }
+  }
+}
+
+/* message box */
+
+.message-box {
+  margin-bottom: 30px;
+  border: 1px solid #eee;
+  overflow: hidden;
+
+  .message-head {
+    font-weight: bold;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+
+    div {
+      display: inline-block;
+      width: 50%;
+      float: left
+    }
+  }
+
+  .message-content {
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 2.0em;
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+  }
+}
+
+/* comment box */
+
+.comment-content {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+/* relationship info box */
+
+.relationship-info {
+  overflow: auto;
+  float: right;
+  padding: 0;
+  text-align: center;
+  a {
+    float: left;
+    padding: 0 10px;
+    border-left: 1px solid $gray-lighter;
+    
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    
+  }
+  strong {
+    display: block;
+  }
+}
+
+/* follow form */
+
+.follow_form {
+  display: inline-block;
+}
+
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}

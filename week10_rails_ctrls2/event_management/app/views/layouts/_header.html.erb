@@ -1,0 +1,14 @@
+<header class="navbar">
+  <div class="container">
+    <nav>
+      <ul class="nav navbar-nav navbar-right">
+        <% if signed_in? %>
+          <li><%= link_to "Events", events_path %></li>
+          <li><%= link_to "Edit My Profile", edit_user_path(current_user) %></li>
+          <li><%= link_to "Sign out", signout_path %></li>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
